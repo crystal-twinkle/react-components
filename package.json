@@ -3,8 +3,10 @@
     "dev": "vite",
     "preview": "vite preview",
     "build": "tsc && vite build",
-    "lint": "eslint src/**/*.{ts,tsx}",
-    "format:fix":  "prettier --write src/**/*.{ts,tsx,css,scss} --config ./.prettierrc"
+    "lint": "eslint src/**/*.{ts,tsx,json}",
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx,json}",
+    "format:fix": "prettier --write src/**/*.{ts,tsx,css,scss,json} --config ./.prettierrc",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/react": "^18.2.33",
