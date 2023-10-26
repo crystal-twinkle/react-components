@@ -1,8 +1,8 @@
 import React, {FormEvent} from 'react';
-import PropsDefault from "./model";
 
-interface SearchProps extends PropsDefault {
+interface SearchProps {
     title: string;
+    inputSearch: (arg: string) => void;
 }
 
 interface SearchState {
@@ -18,8 +18,14 @@ class Search extends React.Component<SearchProps, SearchState>{
     }
 
     inputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({ inputValue: event.target.value });
+        const query = event.target.value;
+        this.setState({ inputValue: query });
     };
+
+    searchClick = (): void => {
+        const query = this.state.inputValue;
+        this.props.inputSearch(query);
+    }
 
     render() {
         const { title } = this.props;
@@ -31,11 +37,14 @@ class Search extends React.Component<SearchProps, SearchState>{
                     <input
                         className="input"
                         type='text'
-                        placeholder=''
+                        placeholder=""
                         onChange={this.inputHandler}
                         value={inputValue}
                     />
-                    <button type='submit' className='search-btn'>
+                    <button
+                        type='submit'
+                        className='search-btn'
+                        onClick={this.searchClick}>
                         search
                     </button>
             </form>

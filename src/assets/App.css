@@ -1,12 +1,15 @@
 .app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
   width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: #74d596;
   font-family: "Neucha", cursive;
 }
+
 
 .heading {
   text-transform: uppercase;
@@ -17,11 +20,25 @@
   text-align: center;
 }
 
+.search-form {
+  width: 300px;
+}
+
 .input {
-  width: 100%;
+  width: 70%;
   padding: 5px 15px;
   margin: 5px 0;
   border: 1px solid teal;
+}
+
+.list{
+  display: flex;
+  gap: 15px;
+}
+
+.list__element {
+  min-width: 300px;
+  background-color: white;
 }
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropsDefault from "./model";
+import PropsDefault from "./models";
 
 type PostListProps = {
     posts: PropsDefault[];
@@ -10,20 +10,21 @@ const PostList: React.FC<PostListProps> = ({posts, title}) => {
 
     if (!posts.length) {
         return (
-            <h1 style={{textAlign: 'center'}}>
-                Посты не найдены!
-            </h1>
+            <h3 style={{textAlign: 'center'}}>
+                No posts found!
+            </h3>
         )
     }
 
     return (
         <div>
-            <h1 style={{textAlign: 'center'}}>
+            <h2 style={{textAlign: 'center'}}>
                 {title}
-            </h1>
-            {posts.map((post,) =>
-                    <div className="post" key={post.id}>
-                        <div className="post__content">
+            </h2>
+            <div className="list">
+            {posts.map((post: PropsDefault) =>
+                    <div className="list__element" key={post.id}>
+                        <div className="list__content">
                             <strong> {post.title}</strong>
                             <div>
                                 {post.body}
@@ -31,6 +32,7 @@ const PostList: React.FC<PostListProps> = ({posts, title}) => {
                         </div>
                     </div>
                 )}
+            </div>
         </div>
     );
 };
