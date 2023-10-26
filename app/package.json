@@ -5,6 +5,7 @@
     "format:fix": "npx prettier --write  \"src/**/*.{ts,tsx,html,css,scss,sass}\""
   },
   "devDependencies": {
+    "@types/react": "^18.2.33",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
     "eslint": "^8.52.0",
@@ -25,5 +26,9 @@
       "npm run format:fix",
       "git add"
     ]
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
