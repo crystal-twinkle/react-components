@@ -1,55 +1,58 @@
-import React, {FormEvent} from 'react';
+import React, { FormEvent } from 'react';
 
 interface SearchProps {
-    title: string;
-    inputSearch: (arg: string) => void;
+  title: string;
+  inputSearch: (arg: string) => void;
 }
 
 interface SearchState {
-    inputValue: string;
+  inputValue: string;
 }
 
-class Search extends React.Component<SearchProps, SearchState>{
-    constructor(props: SearchProps) {
-        super(props);
-        this.state = {
-            inputValue: "",
-        }
-    }
-
-    inputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const query = event.target.value;
-        this.setState({ inputValue: query });
+class Search extends React.Component<SearchProps, SearchState> {
+  constructor(props: SearchProps) {
+    super(props);
+    this.state = {
+      inputValue: '',
     };
+  }
 
-    searchClick = (): void => {
-        const query = this.state.inputValue;
-        this.props.inputSearch(query);
-    }
+  inputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const query = event.target.value;
+    this.setState({ inputValue: query });
+  };
 
-    render() {
-        const { title } = this.props;
-        const { inputValue } = this.state;
+  searchClick = (): void => {
+    const query = this.state.inputValue;
+    this.props.inputSearch(query);
+  };
 
-        return (
-            <form className='search-form' onSubmit={(event:FormEvent)=>event.preventDefault()}>
-                <span style={{textAlign: "center", fontWeight: "bold"}}> {title}</span>
-                    <input
-                        className="input"
-                        type='text'
-                        placeholder=""
-                        onChange={this.inputHandler}
-                        value={inputValue}
-                    />
-                    <button
-                        type='submit'
-                        className='search-btn'
-                        onClick={this.searchClick}>
-                        search
-                    </button>
-            </form>
-        );
-    }
+  render() {
+    const { title } = this.props;
+    const { inputValue } = this.state;
+
+    return (
+      <form
+        className="search-form"
+        onSubmit={(event: FormEvent) => event.preventDefault()}
+      >
+        <span style={{ textAlign: 'center', fontWeight: 'bold' }}>
+          {' '}
+          {title}
+        </span>
+        <input
+          className="input"
+          type="text"
+          placeholder=""
+          onChange={this.inputHandler}
+          value={inputValue}
+        />
+        <button type="submit" className="search-btn" onClick={this.searchClick}>
+          search
+        </button>
+      </form>
+    );
+  }
 }
 
 export default Search;
