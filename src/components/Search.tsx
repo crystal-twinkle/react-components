@@ -6,15 +6,19 @@ interface SearchProps {
 }
 
 interface SearchState {
-  inputValue: string;
+  inputValue: string | null;
 }
 
 class Search extends React.Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
     super(props);
     this.state = {
-      inputValue: '',
+      inputValue: localStorage.getItem('search') || '',
     };
+  }
+
+  componentDidMount() {
+    this.setState({ inputValue: localStorage.getItem('search') });
   }
 
   inputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -24,7 +28,9 @@ class Search extends React.Component<SearchProps, SearchState> {
 
   searchClick = (): void => {
     const query = this.state.inputValue;
-    this.props.inputSearch(query);
+    if (query != null) {
+      this.props.inputSearch(query);
+    }
   };
 
   render() {
@@ -45,7 +51,7 @@ class Search extends React.Component<SearchProps, SearchState> {
           type="text"
           placeholder=""
           onChange={this.inputHandler}
-          value={inputValue}
+          value={inputValue || ''}
         />
         <button type="submit" className="search-btn" onClick={this.searchClick}>
           search

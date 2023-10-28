@@ -12,11 +12,12 @@ class App extends React.Component {
   };
 
   search = (dates: IPost[], query: string) => {
+    localStorage.setItem('search', query);
     if (!query.length) {
       return dates;
     }
     return dates.filter((data) => {
-      return data.name.indexOf(query) > -1;
+      return data.name.indexOf(query.trim()) > -1;
     });
   };
 
@@ -25,21 +26,16 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    PokemonApi.getALL().then((data) => {
+    PokemonApi.getALL().then((data: IPost[]) => {
       this.setState({ data });
     });
   }
-
-  serverGet = async () => {
-    console.log(PokemonApi.getALL());
-  };
 
   render() {
     const { data, query } = this.state;
     const foundItems: IPost[] = this.search(data, query);
     return (
       <div className="app">
-        <button onClick={this.serverGet}>GET</button>
         <Search title="Write something" inputSearch={this.inputSearch} />
         <PostList posts={foundItems} title="You List" />
       </div>
