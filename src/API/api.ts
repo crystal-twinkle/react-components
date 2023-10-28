@@ -2,7 +2,8 @@ import axios from 'axios';
 import PropsDefault, { IPost } from '../components/models';
 
 export default class PokemonApi {
-  private static _link: string = 'https://pokeapi.co/api/v2/pokemon';
+  private static _link: string =
+    'https://pokeapi.co/api/v2/pokemon?limit=20&offset=20"';
 
   static async getALL() {
     const response = await axios.get(`${this._link}`);
@@ -20,7 +21,10 @@ export default class PokemonApi {
     return response.data;
   }
 
-  static async getByName(name: string = 'bulbasaur') {
-    return await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  static async getByName(name: string = 'spearow') {
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${name}`
+    );
+    return response.data;
   }
 }

@@ -4,10 +4,12 @@ import Search from './components/Search';
 import PostList from './components/PostList';
 import { IPost } from './components/models';
 import PokemonApi from './API/api';
+import Loading from './components/Loading';
 
 class App extends React.Component {
   state = {
     data: [],
+    isLoading: false,
     query: localStorage.getItem('search') || '',
   };
 
@@ -21,23 +23,44 @@ class App extends React.Component {
     });
   };
 
+  search2 = () => {
+    this.setState({ isLoading: false });
+    PokemonApi.getByName().then((data) => {
+      console.log(data);
+    });
+    this.setState({ isLoading: true });
+  };
+
   inputSearch = (query: string) => {
     this.setState({ query });
   };
 
   componentDidMount() {
+    this.setState({ isLoading: false });
     PokemonApi.getALL().then((data: IPost[]) => {
       this.setState({ data });
+      this.setState({ isLoading: true });
+    });
+  }
+
+  some() {
+    PokemonApi.getByName().then((data) => {
+      console.log(data);
     });
   }
 
   render() {
-    const { data, query } = this.state;
+    const { data, query, isLoading } = this.state;
     const foundItems: IPost[] = this.search(data, query);
     return (
       <div className="app">
+        <button onClick={this.some}>SOME</button>
         <Search title="Write something" inputSearch={this.inputSearch} />
-        <PostList posts={foundItems} title="You List" />
+        {isLoading ? (
+          <PostList posts={foundItems} title="You List" />
+        ) : (
+          <Loading />
+        )}
       </div>
     );
   }
