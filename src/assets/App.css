@@ -19,10 +19,21 @@
   border: 1px solid teal;
 }
 
-.error_btn {
+.error-btn {
   position: absolute;
-  top: 8%;
+  top: 7%;
   right: 20%;
   background-color: rgba(255, 0, 38, 0.93);
-  color: rgba(250, 226, 226, 0.93);
+  color: #fff;
+  background-image: linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+  cursor: pointer;
+  border-style: none;
+  border-radius: 80px;
+  padding: 10px;
+}
+
+@media (max-width: 570px) {
+  .error-btn {
+    top: 12%;
+  }
 }

@@ -69,7 +69,7 @@ class App extends React.Component {
     }
     return (
       <div className="app">
-        <button className="error_btn" onClick={this.errorClick}>
+        <button className="error-btn" onClick={this.errorClick}>
           Generate Error
         </button>
         <Search title="Write something" inputSearch={this.inputSearch} />
