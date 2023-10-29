@@ -19,9 +19,10 @@
   border: 1px solid teal;
 }
 
-@media (max-width: 800px) {
-  .heading {
-    margin: 15px 0;
-    font-size: 35px;
-  }
+.error_btn {
+  position: absolute;
+  top: 8%;
+  right: 20%;
+  background-color: rgba(255, 0, 38, 0.93);
+  color: rgba(250, 226, 226, 0.93);
 }

@@ -5,16 +5,19 @@ import PostList from './components/PostList';
 import { IPost } from './components/models';
 import PokemonApi from './API/api';
 import Loading from './components/Loading';
+import ErrorPage from './components/ErrorPage';
 
 class App extends React.Component {
   state = {
     data: [],
     isLoading: false,
     query: localStorage.getItem('search') || '',
+    isError: false,
   };
 
   search = (dates: IPost[], query: string) => {
     localStorage.setItem('search', query);
+    query = query.toLowerCase();
     if (!query.length) {
       return dates;
     }
@@ -49,12 +52,26 @@ class App extends React.Component {
     });
   }
 
+  errorClick = () => {
+    this.setState({ isError: true });
+    throw new Error('Test error');
+  };
+
   render() {
-    const { data, query, isLoading } = this.state;
+    const { data, query, isLoading, isError } = this.state;
     const foundItems: IPost[] = this.search(data, query);
+    if (isError) {
+      return (
+        <ErrorPage
+          isErrorChange={(isError: boolean) => this.setState({ isError })}
+        />
+      );
+    }
     return (
       <div className="app">
-        <button onClick={this.some}>SOME</button>
+        <button className="error_btn" onClick={this.errorClick}>
+          Generate Error
+        </button>
         <Search title="Write something" inputSearch={this.inputSearch} />
         {isLoading ? (
           <PostList posts={foundItems} title="You List" />
