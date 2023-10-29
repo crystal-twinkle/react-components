@@ -1,0 +1,28 @@
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100vw;
+  min-height: 100vh;
+  opacity: 1;
+  font-family: 'Neucha', cursive;
+}
+
+.search-form {
+  width: 300px;
+}
+
+.input {
+  width: 80%;
+  padding: 5px 15px;
+  margin: 5px 0;
+  border: 1px solid teal;
+}
+
+.error_btn {
+  position: absolute;
+  top: 8%;
+  right: 20%;
+  background-color: rgba(255, 0, 38, 0.93);
+  color: rgba(250, 226, 226, 0.93);
+}
