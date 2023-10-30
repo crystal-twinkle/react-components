@@ -23,6 +23,7 @@ class Search extends React.Component<SearchProps, SearchState> {
 
   inputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value;
+    localStorage.setItem('search', query);
     this.setState({ inputValue: query });
   };
 

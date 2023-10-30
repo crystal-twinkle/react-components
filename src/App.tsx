@@ -10,45 +10,38 @@ import ErrorPage from './components/ErrorPage';
 class App extends React.Component {
   state = {
     data: [],
+    newData: [],
     isLoading: false,
     query: localStorage.getItem('search') || '',
     isError: false,
   };
 
-  search = (dates: IPost[], query: string) => {
-    localStorage.setItem('search', query);
-    query = query.toLowerCase();
-    if (!query.length) {
-      return dates;
-    }
-    return dates.filter((data) => {
-      return data.name.indexOf(query.trim()) > -1;
-    });
-  };
-
-  search2 = () => {
-    this.setState({ isLoading: false });
-    PokemonApi.getByName().then((data) => {
-      console.log(data);
-    });
-    this.setState({ isLoading: true });
-  };
-
-  inputSearch = (query: string) => {
+  inputSearch = (query?: string) => {
     this.setState({ query });
+    const searchString = localStorage.getItem('search');
+    this.setState({ isLoading: false });
+    searchString
+      ? PokemonApi.getByName(searchString.toLowerCase())
+          .then((data) => {
+            const newArr: IPost[] = [];
+            newArr.push(data);
+            this.setState({ newData: newArr });
+          })
+          .catch(() => this.setState({ newData: [] }))
+      : this.setState({ newData: this.state.data });
+    this.setState({ isLoading: true });
   };
 
   componentDidMount() {
     this.setState({ isLoading: false });
     PokemonApi.getALL().then((data: IPost[]) => {
       this.setState({ data });
+      if (localStorage.getItem('search')) {
+        this.inputSearch();
+      } else {
+        this.setState({ newData: data });
+      }
       this.setState({ isLoading: true });
-    });
-  }
-
-  some() {
-    PokemonApi.getByName().then((data) => {
-      console.log(data);
     });
   }
 
@@ -58,8 +51,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { data, query, isLoading, isError } = this.state;
-    const foundItems: IPost[] = this.search(data, query);
+    const { newData, isLoading, isError } = this.state;
     if (isError) {
       return (
         <ErrorPage
@@ -74,7 +66,7 @@ class App extends React.Component {
         </button>
         <Search title="Write something" inputSearch={this.inputSearch} />
         {isLoading ? (
-          <PostList posts={foundItems} title="You List" />
+          <PostList posts={newData} title="You List" />
         ) : (
           <Loading />
         )}
