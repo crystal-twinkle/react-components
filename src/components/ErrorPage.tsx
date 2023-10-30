@@ -1,4 +1,3 @@
-import { ErrorBoundary } from 'react-error-boundary';
 import React, { Component } from 'react';
 import '../assets/ErrorPage.css';
 
@@ -22,14 +21,12 @@ export default class ErrorPage extends Component<Props, State> {
 
   render() {
     return (
-      <ErrorBoundary fallback={<div>Something went wrong</div>}>
-        <div className="error-wrap">
-          <div className="error__text">OOPS, something went wrong (((</div>
-          <button className="button-21" onClick={this.change}>
-            Reset
-          </button>
-        </div>
-      </ErrorBoundary>
+      <div className="error-wrap">
+        <div className="error__text">OOPS, something went wrong (((</div>
+        <button className="button-21" onClick={this.change}>
+          Reset
+        </button>
+      </div>
     );
   }
 }
