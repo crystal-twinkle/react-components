@@ -7,7 +7,6 @@ export interface IErrorBoundaryProps {
 
 export interface IErrorBoundaryState {
   hasError: boolean;
-  errorString: string;
 }
 
 export default class ErrorBoundary extends Component<
@@ -20,7 +19,8 @@ export default class ErrorBoundary extends Component<
   };
 
   componentDidCatch(error: Error) {
-    this.setState({ hasError: true, errorString: error.message });
+    console.error('Custom Error: ', error);
+    this.setState({ hasError: true });
   }
 
   public render(): ReactNode {

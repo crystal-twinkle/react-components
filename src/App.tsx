@@ -5,7 +5,6 @@ import PostList from './components/PostList';
 import { IPost } from './components/models';
 import PokemonApi from './API/api';
 import Loading from './components/Loading';
-import ErrorPage from './components/ErrorPage';
 
 class App extends React.Component {
   state = {
@@ -47,17 +46,12 @@ class App extends React.Component {
 
   errorClick = () => {
     this.setState({ isError: true });
-    throw new Error('Test error');
   };
 
   render() {
     const { newData, isLoading, isError } = this.state;
     if (isError) {
-      return (
-        <ErrorPage
-          isErrorChange={(isError: boolean) => this.setState({ isError })}
-        />
-      );
+      throw new Error('Test error');
     }
     return (
       <div className="app">
