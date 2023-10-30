@@ -15,7 +15,6 @@ export default class ErrorBoundary extends Component<
 > {
   public state: IErrorBoundaryState = {
     hasError: false,
-    errorString: '',
   };
 
   componentDidCatch(error: Error) {
